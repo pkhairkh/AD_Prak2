@@ -1,8 +1,15 @@
 #include "EVDK.h"
 
-void TEXT::anhaenge (char* In) {
+TEXT::TEXT(){
+	Anz = 0;
+	Start = nullptr;
+}
 
-    EVKD uebergabe(In);
+
+
+void TEXT::anhaenge ( char *In) {
+
+    EVKD uebergabe(&In);
     if(this->Start!=NULL){
         EVKD* temp(this->Start);
         while (temp->getNext() != null) {
@@ -15,9 +22,10 @@ void TEXT::anhaenge (char* In) {
 void TEXT::einfuegeSortiert(EVKD * In, int Max){
         
         if(Anz+1>Max){
-            printf("Objekt konnte nicht eingefügt werden, da die aktuelle Anzahl schon %d beträgt und kein weiteres Objekt aufnehmen kann.",Anz);
+            cout << "max amount reached " << endl;
             return;
         }
+
         if(this->Start==NULL){
             this->Start=&(*In);
             return;
@@ -49,14 +57,39 @@ void TEXT::einfuegeSortiert(EVKD * In, int Max){
         }
 }
 
+void TEXT::zeigeDich(){
+	if(this->start != nullptr){
+		int i = 1;
+		EVKD *tmp = this->start;
+		while(tmp->getNext() != nullptr){
+			cout << i << ": Adresse: " << tmp << "  Inhalt:  " << tmp->getDaten() << " Next: " << tmp->getNext() << endl;
+			i++;
+			tmp = tmp->getNext();
+		}
+		cout << i << ": Adresse: " << tmp << "  Inhalt:  " << tmp->getDaten() << " Ich bin das Letzte" << endl;
+	}
+}
+
+void TEXT::iSort(){
+	int i = 2;
+	EVKD *tmp;
+	if(this->anz > 1){
+		while(i <= this->anz){
+			tmp = loesche(i);
+			einfuegeSortiert(tmp, i - 1);
+			i++;
+		}
+	}
+}
+
 void TEXT::loesche(int Pos){
         if(Pos>this->Anz){
-            printf("Element an Position %d konnte nicht gelöscht werden, da es außerhalb der Elemente liegt.",Pos);
+            cout << "Element an Position " << Pos << " konnte nicht gelöscht werden, da es außerhalb der Elemente liegt." << endl;
             return;
         }
         EVKD *preobj(this->Start);
         if(preobj==NULL){
-            printf("Element an Position %d konnte nicht gelöscht werden, da es keine Elemente gibt.",Pos);
+            cout << "Element an Position " << Pos << " konnte nicht gelöscht werden, da es keine Elemente gibt." << endl;
             return;
         }
         for(int i=0; i<Pos-1;i++){
@@ -75,6 +108,6 @@ void TEXT::loesche(int Pos){
             }
         }
         else{
-            printf("Das Element exisitert nicht.");
+            cout << "Das Element exisitert nicht." << endl;
         }
 }

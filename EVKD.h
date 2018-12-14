@@ -12,7 +12,7 @@ class EVKD{
     EVKD(char * LPSZDaten, EVKD *N=NULL)
             : Daten(LPSZDaten), Next(N){}
 
-    EVKD(const EVKD &E1) {
+    EVKD( EVKD &E1) {
         Daten = E1.Daten;
         Anz = E1.Anz;
         Next = E1.Next;
