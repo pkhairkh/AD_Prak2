@@ -1,4 +1,6 @@
 #include "EVKD.h"
+#include <stdlib.h>
+#include <string.h>
 
 bool EVKD::operator> ( EVKD &E1) {
 

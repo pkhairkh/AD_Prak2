@@ -1,21 +1,27 @@
-#include "EVDK.h"
+#include "TEXT.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <iostream>
 
 TEXT::TEXT(){
+    
+    printf("hallo");
 	Anz = 0;
 	Start = nullptr;
+   
 }
 
 
-
-void TEXT::anhaenge ( char *In) {
-
-    EVKD uebergabe(&In);
-    if(this->Start!=NULL){
+void TEXT::anhaenge (char *In) {
+    printf("hallo");
+    //EVKD uebergabe(In);
+    /*if(this->Start!=NULL){
         EVKD* temp(this->Start);
         while (temp->getNext() != null) {
             temp = temp->getNext();
         }
-        temp->setNext(uebergabe);       
+        temp->setNext(uebergabe); */      
     }
 }  
 
@@ -27,7 +33,7 @@ void TEXT::einfuegeSortiert(EVKD * In, int Max){
         }
 
         if(this->Start==NULL){
-            this->Start=&(*In);
+           this->Start=&(*In);
             return;
         }
         if(In>Start){

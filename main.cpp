@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,12 +14,11 @@ using namespace std;
 int main(){
 	int auswahl, ein;
 	char *eingabe;
-	TEXT *text = new TEXT();
 	EVKD *evkd;
+	TEXT *text = NULL;
     char * name[] = { "Schmitz, Josef","Mueller, Josi","Schmitz, Anna",
 						"Mueller, Josef","Schmitz, Josi","Mueller, Anna",
 						"Meier, Josef","Zacher, Josi","Anker, Anna" };
-
 
 	do{
 
@@ -37,9 +37,12 @@ int main(){
 		switch(auswahl){
 
 			case 1:  cout << endl << "Listenobjekt wird erstellt" << endl;
-				text = new TEXT();
-				for(int i = 0; i < 9; i++){
-					text->anhaenge(name[i]);
+				if (text == NULL){
+						text = new TEXT();
+					for(int i = 0; i < 9; i++){
+						text->anhaenge(name[i]);
+						printf("%s\n", name[i]);
+					}
 				}
 				break;
 
@@ -48,7 +51,7 @@ int main(){
 				break;
 			case 3:  cout << endl << "Wort eingeben, das angehaenget werden soll" << endl;
 				eingabe = new char[maxLength];
-				cin.getline(eingabe, maxLengt );
+				cin.getline(eingabe, maxLength );
 				cin.clear();
 				text->anhaenge(eingabe);
 				delete[] eingabe;
@@ -57,7 +60,7 @@ int main(){
 				eingabe = new char[maxLength];
 				cin.getline(eingabe, maxLength);
 				cin.clear();
-				evkd = new EVKD(eingabe);
+				evkd = new EVKD(eingabe, NULL);
 				text->einfuegeSortiert(evkd, text->Anz);
 				delete[] eingabe;
 				break;
